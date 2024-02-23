@@ -5,7 +5,7 @@
     --elbow-connector-border:var(--elbow-connector-border-width) solid red;
 
     --elbow-connector-point-diameter:10px;
-    --elbow-connector-point-bg-color:blue;
+    --elbow-connector-point-bg-color:red;
 }
 .elbow-connector-container{
 
@@ -49,17 +49,18 @@
 .elbow-connector::before{
     flex:1 0 var(--before-flex-basis);
     content: attr(data-ec-point-start);
-    background-color: #abc;
+    /* background-color: #aabbcc66; */
     border-width:var(--before-border-width);
 }
 .elbow-connector::after{
     flex:0 1 100%;
     content: attr(data-ec-point-end);
-    background-color: #cba;
+    /* background-color: #ccbbaa66; */
     border-width:var(--after-border-width);
 }
 
 
+/* line */
 .elbow-connector[data-ec-direction="row"][data-ec-point-start="0"][data-ec-point-end="2"]::before,
 .elbow-connector[data-ec-direction="row"][data-ec-point-start="2"][data-ec-point-end="0"]::before{
     --before-border-width:var(--elbow-connector-border-width) var(--elbow-connector-border-width) 0 0 ;
@@ -78,6 +79,27 @@
     --after-border-width:var(--elbow-connector-border-width) 0 0 0;
 }
 
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="0"][data-ec-point-end="2"]::before,
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="2"][data-ec-point-end="0"]::before{
+    --before-border-width:0 0 var(--elbow-connector-border-width) var(--elbow-connector-border-width);
+}
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="0"][data-ec-point-end="2"]::after,
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="2"][data-ec-point-end="0"]::after{
+    --after-border-width:0 var(--elbow-connector-border-width) 0 0;
+}
+
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="3"][data-ec-point-end="1"]::before,
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="1"][data-ec-point-end="3"]::before{
+    --before-border-width:0 var(--elbow-connector-border-width) var(--elbow-connector-border-width) 0 ;
+}
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="3"][data-ec-point-end="1"]::after,
+.elbow-connector[data-ec-direction="column"][data-ec-point-start="1"][data-ec-point-end="3"]::after{
+    --after-border-width:0 0 0 var(--elbow-connector-border-width);
+}
+
+
+
+
 /* points */
 .elbow-connector > .points{
     position: absolute;
@@ -86,17 +108,17 @@
     --points-gap2:calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
 }
 .elbow-connector[data-ec-direction="row"] > .points{
-    top:calc( -1 * var(--points-gap2) );
-    bottom:calc( -1 * var(--points-gap2) );
-    left:calc( -1 * var(--points-gap) );
-    right:calc( -1 * var(--points-gap) );
+    --tanslate-top:calc(-1 * var(--points-gap2));
+    --tanslate-left:calc(-1 * var(--points-gap));
+    --tanslate-bottom:var(--points-gap2);
+    --tanslate-right:var(--points-gap);
 }
-/* .elbow-connector[data-ec-direction="column"] > .points{
-    left:calc( -1 * var(--points-gap2) );
-    right:calc( -1 * var(--points-gap2) );
-    top:calc( -1 * var(--points-gap) );
-    bottom:calc( -1 * var(--points-gap) );
-} */
+.elbow-connector[data-ec-direction="column"] > .points{
+    --tanslate-top:calc(-1 * var(--points-gap));
+    --tanslate-left:calc(-1 * var(--points-gap2));
+    --tanslate-bottom:var(--points-gap);
+    --tanslate-right:var(--points-gap2);
+}
 
 .elbow-connector > .points::before,
 .elbow-connector > .points::after{
@@ -113,14 +135,13 @@
 
     position: absolute;
 }
-.elbow-connector[data-ec-point-start="0"]{
-    --translate: calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
-}
-.elbow-connector[data-ec-point-start="1"]{
-    --translate: calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
-}
 
-.elbow-connector[data-ec-point-start="0"] > .points::before{ content: ""; top:0;left:0; }
-.elbow-connector[data-ec-point-end="0"] > .points::after   { content: ""; top:0;left:0; }
-.elbow-connector[data-ec-point-start="1"] > .points::before{ content: ""; top:0;right:0; }
-.elbow-connector[data-ec-point-end="1"] > .points::after   { content: ""; top:0;right:0; }
+.elbow-connector[data-ec-point-start="0"] > .points::before ,
+.elbow-connector[data-ec-point-end="0"] > .points::after{ content: ""; left:0;top:0; transform:translate(var(--tanslate-left) , var(--tanslate-top)); }
+.elbow-connector[data-ec-point-start="1"] > .points::before ,
+.elbow-connector[data-ec-point-end="1"] > .points::after   { content: ""; right:0;top:0; transform:translate(var(--tanslate-right) , var(--tanslate-top)); }
+
+.elbow-connector[data-ec-point-start="2"] > .points::before ,
+.elbow-connector[data-ec-point-end="2"] > .points::after   { content: ""; right:0;bottom:0; transform:translate(var(--tanslate-right), var(--tanslate-bottom)); }
+.elbow-connector[data-ec-point-start="3"] > .points::before ,
+.elbow-connector[data-ec-point-end="3"] > .points::after   { content: ""; left:0;bottom:0; transform:translate(var(--tanslate-left), var(--tanslate-bottom)); }
