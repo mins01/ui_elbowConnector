@@ -1,0 +1,126 @@
+@charset "utf-8";
+
+:root{
+    --elbow-connector-border-width:2px;
+    --elbow-connector-border:var(--elbow-connector-border-width) solid red;
+
+    --elbow-connector-point-diameter:10px;
+    --elbow-connector-point-bg-color:blue;
+}
+.elbow-connector-container{
+
+}
+.elbow-connector-container[data-postion="relative"]{
+
+}
+.elbow-connector-container[data-postion="absolute"]{
+
+}
+.elbow-connector-container[data-postion="fixed"]{
+
+}
+.elbow-connector{
+    outline: 1px dotted #999;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+
+    position: relative;
+
+    --before-border-width: 0 0 0 0;
+    --after-border-width: 0 0 0 0;
+    --before-flex-basis:50%
+}
+.elbow-connector[data-ec-direction="row"]{ flex-direction: row; }
+.elbow-connector[data-ec-direction="column"]{ flex-direction: column; }
+
+.elbow-connector::before,
+.elbow-connector::after{
+    content: 'x';
+    display: block;
+    flex:1 1 50%;
+    border: var(--elbow-connector-border);
+    overflow: hidden;
+}
+.elbow-connector::before{
+    flex:1 0 var(--before-flex-basis);
+    content: attr(data-ec-point-start);
+    background-color: #abc;
+    border-width:var(--before-border-width);
+}
+.elbow-connector::after{
+    flex:0 1 100%;
+    content: attr(data-ec-point-end);
+    background-color: #cba;
+    border-width:var(--after-border-width);
+}
+
+
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="0"][data-ec-point-end="2"]::before,
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="2"][data-ec-point-end="0"]::before{
+    --before-border-width:var(--elbow-connector-border-width) var(--elbow-connector-border-width) 0 0 ;
+}
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="0"][data-ec-point-end="2"]::after,
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="2"][data-ec-point-end="0"]::after{
+    --after-border-width:0 0 var(--elbow-connector-border-width) 0;
+}
+
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="3"][data-ec-point-end="1"]::before,
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="1"][data-ec-point-end="3"]::before{
+    --before-border-width:0 var(--elbow-connector-border-width) var(--elbow-connector-border-width) 0 ;
+}
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="3"][data-ec-point-end="1"]::after,
+.elbow-connector[data-ec-direction="row"][data-ec-point-start="1"][data-ec-point-end="3"]::after{
+    --after-border-width:var(--elbow-connector-border-width) 0 0 0;
+}
+
+/* points */
+.elbow-connector > .points{
+    position: absolute;
+    top:0;left:0;right:0;bottom:0;
+    --points-gap:calc( var(--elbow-connector-point-diameter) / 2 );
+    --points-gap2:calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
+}
+.elbow-connector[data-ec-direction="row"] > .points{
+    top:calc( -1 * var(--points-gap2) );
+    bottom:calc( -1 * var(--points-gap2) );
+    left:calc( -1 * var(--points-gap) );
+    right:calc( -1 * var(--points-gap) );
+}
+/* .elbow-connector[data-ec-direction="column"] > .points{
+    left:calc( -1 * var(--points-gap2) );
+    right:calc( -1 * var(--points-gap2) );
+    top:calc( -1 * var(--points-gap) );
+    bottom:calc( -1 * var(--points-gap) );
+} */
+
+.elbow-connector > .points::before,
+.elbow-connector > .points::after{
+
+    /* --elbow-connector-point-diameter:10px;
+    --elbow-connector-point-bg-color:blue; */
+
+    content: none;
+    width:var(--elbow-connector-point-diameter);
+    height:var(--elbow-connector-point-diameter);
+    display: block;
+    border-radius: 99999px;
+    background-color: var(--elbow-connector-point-bg-color);
+
+    position: absolute;
+}
+.elbow-connector[data-ec-point-start="0"]{
+    --translate: calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
+}
+.elbow-connector[data-ec-point-start="1"]{
+    --translate: calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
+}
+
+.elbow-connector[data-ec-point-start="0"] > .points::before{ content: ""; top:0;left:0; }
+.elbow-connector[data-ec-point-end="0"] > .points::after   { content: ""; top:0;left:0; }
+.elbow-connector[data-ec-point-start="1"] > .points::before{ content: ""; top:0;right:0; }
+.elbow-connector[data-ec-point-end="1"] > .points::after   { content: ""; top:0;right:0; }
