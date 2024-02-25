@@ -8,7 +8,10 @@
     --elbow-connector-point-bg-color:red;
 }
 .elbow-connector-container{
-
+    position: absolute;
+    top:0;height:0;
+    width:0;height:0;
+    overflow: visible;
 }
 .elbow-connector-container[data-postion="relative"]{
 
@@ -20,7 +23,7 @@
 
 }
 .elbow-connector{
-    outline: 1px dotted #999;
+    
 
     display: flex;
     flex-direction: row;
@@ -33,7 +36,22 @@
 
     --before-border-width: 0 0 0 0;
     --after-border-width: 0 0 0 0;
-    --before-flex-basis:50%
+    --before-flex-basis:50%;
+
+    --ec-top:auto;
+    --ec-left:auto;
+    --ec-bottom:auto;
+    --ec-right:auto;
+    --ec-width:auto;
+    --ec-height:auto;
+}
+.elbow-connector[data-ec-from]{
+    position: absolute;
+    top:var(--ec-top);
+    left:var(--ec-left);
+    bottom:var(--ec-bottom);
+    right:var(--ec-right);
+    width:auto;height:auto;
 }
 .elbow-connector[data-ec-direction="row"]{ flex-direction: row; }
 .elbow-connector[data-ec-direction="column"]{ flex-direction: column; }
@@ -48,52 +66,63 @@
 }
 .elbow-connector::before{
     flex:1 0 var(--before-flex-basis);
-    content: attr(data-ec-point-start);
-    /* background-color: #aabbcc66; */
+    content: attr(data-ec-point-from);
     border-width:var(--before-border-width);
 }
 .elbow-connector::after{
     flex:0 1 100%;
-    content: attr(data-ec-point-end);
-    /* background-color: #ccbbaa66; */
+    content: attr(data-ec-point-to);
     border-width:var(--after-border-width);
 }
 
+.debug{
+    & .elbow-connector{
+        outline: 1px dotted #999;
+    }
+    & .elbow-connector::before{
+        background-color: #aabbcc66;
+    }
+    & .elbow-connector::after{
+        background-color: #ccbbaa66;
+    }
+} 
+
+
 
 /* line */
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="0"][data-ec-point-end="2"]::before,
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="2"][data-ec-point-end="0"]::before{
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="0"][data-ec-point-to="2"]::before,
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="2"][data-ec-point-to="0"]::before{
     --before-border-width:var(--elbow-connector-border-width) var(--elbow-connector-border-width) 0 0 ;
 }
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="0"][data-ec-point-end="2"]::after,
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="2"][data-ec-point-end="0"]::after{
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="0"][data-ec-point-to="2"]::after,
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="2"][data-ec-point-to="0"]::after{
     --after-border-width:0 0 var(--elbow-connector-border-width) 0;
 }
 
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="3"][data-ec-point-end="1"]::before,
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="1"][data-ec-point-end="3"]::before{
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="3"][data-ec-point-to="1"]::before,
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="1"][data-ec-point-to="3"]::before{
     --before-border-width:0 var(--elbow-connector-border-width) var(--elbow-connector-border-width) 0 ;
 }
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="3"][data-ec-point-end="1"]::after,
-.elbow-connector[data-ec-direction="row"][data-ec-point-start="1"][data-ec-point-end="3"]::after{
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="3"][data-ec-point-to="1"]::after,
+.elbow-connector[data-ec-direction="row"][data-ec-point-from="1"][data-ec-point-to="3"]::after{
     --after-border-width:var(--elbow-connector-border-width) 0 0 0;
 }
 
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="0"][data-ec-point-end="2"]::before,
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="2"][data-ec-point-end="0"]::before{
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="0"][data-ec-point-to="2"]::before,
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="2"][data-ec-point-to="0"]::before{
     --before-border-width:0 0 var(--elbow-connector-border-width) var(--elbow-connector-border-width);
 }
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="0"][data-ec-point-end="2"]::after,
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="2"][data-ec-point-end="0"]::after{
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="0"][data-ec-point-to="2"]::after,
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="2"][data-ec-point-to="0"]::after{
     --after-border-width:0 var(--elbow-connector-border-width) 0 0;
 }
 
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="3"][data-ec-point-end="1"]::before,
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="1"][data-ec-point-end="3"]::before{
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="3"][data-ec-point-to="1"]::before,
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="1"][data-ec-point-to="3"]::before{
     --before-border-width:0 var(--elbow-connector-border-width) var(--elbow-connector-border-width) 0 ;
 }
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="3"][data-ec-point-end="1"]::after,
-.elbow-connector[data-ec-direction="column"][data-ec-point-start="1"][data-ec-point-end="3"]::after{
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="3"][data-ec-point-to="1"]::after,
+.elbow-connector[data-ec-direction="column"][data-ec-point-from="1"][data-ec-point-to="3"]::after{
     --after-border-width:0 0 0 var(--elbow-connector-border-width);
 }
 
@@ -129,19 +158,23 @@
     content: none;
     width:var(--elbow-connector-point-diameter);
     height:var(--elbow-connector-point-diameter);
+    display: none;;
+    position: absolute;
+}
+.elbow-connector > .points.points-circle::before,
+.elbow-connector > .points.points-circle::after{
     display: block;
     border-radius: 99999px;
     background-color: var(--elbow-connector-point-bg-color);
-
-    position: absolute;
 }
 
-.elbow-connector[data-ec-point-start="0"] > .points::before ,
-.elbow-connector[data-ec-point-end="0"] > .points::after{ content: ""; left:0;top:0; transform:translate(var(--tanslate-left) , var(--tanslate-top)); }
-.elbow-connector[data-ec-point-start="1"] > .points::before ,
-.elbow-connector[data-ec-point-end="1"] > .points::after   { content: ""; right:0;top:0; transform:translate(var(--tanslate-right) , var(--tanslate-top)); }
+.elbow-connector[data-ec-point-from="0"] > .points::before ,
+.elbow-connector[data-ec-point-to="0"] > .points::after{ content: ""; left:0;top:0; transform:translate(var(--tanslate-left) , var(--tanslate-top)); }
+.elbow-connector[data-ec-point-from="1"] > .points::before ,
+.elbow-connector[data-ec-point-to="1"] > .points::after   { content: ""; right:0;top:0; transform:translate(var(--tanslate-right) , var(--tanslate-top)); }
 
-.elbow-connector[data-ec-point-start="2"] > .points::before ,
-.elbow-connector[data-ec-point-end="2"] > .points::after   { content: ""; right:0;bottom:0; transform:translate(var(--tanslate-right), var(--tanslate-bottom)); }
-.elbow-connector[data-ec-point-start="3"] > .points::before ,
-.elbow-connector[data-ec-point-end="3"] > .points::after   { content: ""; left:0;bottom:0; transform:translate(var(--tanslate-left), var(--tanslate-bottom)); }
+.elbow-connector[data-ec-point-from="2"] > .points::before ,
+.elbow-connector[data-ec-point-to="2"] > .points::after   { content: ""; right:0;bottom:0; transform:translate(var(--tanslate-right), var(--tanslate-bottom)); }
+.elbow-connector[data-ec-point-from="3"] > .points::before ,
+.elbow-connector[data-ec-point-to="3"] > .points::after   { content: ""; left:0;bottom:0; transform:translate(var(--tanslate-left), var(--tanslate-bottom)); }
+

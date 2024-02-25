@@ -42,71 +42,120 @@
         }
     </style>
     <link rel="stylesheet" href="elbow-connector.css">
+    <script src="ElbowConnector.js"></script>
+    <script>
+        ElbowConnector.addEventListener(window);
+        window.addEventListener('load',(evnet)=>{
+            ElbowConnector.debug = true;
+            // ElbowConnector.sync(document.querySelector('#ec-1'))
+            
+        })
+    </script>
 </head>
-<body>
+<body class="debug">
     <div class="container">
         <h1>elbow connector</h1>
         <hr>
         <h2>data-ec-direction="row"</h2>
-        <div class="border border-1 bg-body-secondary   elbow-connector-container" style=" min-height: 400px;">
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="2" data-ec-point-end="0" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="3" data-ec-point-end="1" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="row" ></div>
+        <div class="border border-1 bg-body-secondary   x-elbow-connector-container" style=" min-height: 400px;">
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="2" data-ec-point-to="0" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="3" data-ec-point-to="1" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="row" ></div>
             <hr>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="row" ></div>
             
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="row" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="row" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="row" ></div>
             <hr>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="row" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="row" >
+                <div class="points points-circle"></div>
             </div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="2" data-ec-point-end="0" data-ec-direction="row" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="2" data-ec-point-to="0" data-ec-direction="row" >
+                <div class="points points-circle"></div>
             </div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="3" data-ec-point-end="1" data-ec-direction="row" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="3" data-ec-point-to="1" data-ec-direction="row" >
+                <div class="points points-circle"></div>
             </div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="row" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="row" >
+                <div class="points points-circle"></div>
             </div>
         </div>
         <h2>data-ec-direction="column"</h2>
-        <div class="border border-1 bg-body-secondary   elbow-connector-container" style=" min-height: 400px;">
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="2" data-ec-point-end="0" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="3" data-ec-point-end="1" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="column" ></div>
+        <div class="border border-1 bg-body-secondary   x-elbow-connector-container" style=" min-height: 400px;">
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="2" data-ec-point-to="0" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="3" data-ec-point-to="1" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="column" ></div>
             <hr>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="column" ></div>
             
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="column" ></div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:0%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:20%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:80%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="column" ></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" style="--before-flex-basis:100%" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="column" ></div>
             <hr>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="0" data-ec-point-end="2" data-ec-direction="column" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="column" >
+                <div class="points points-circle"></div>
             </div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="2" data-ec-point-end="0" data-ec-direction="column" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="2" data-ec-point-to="0" data-ec-direction="column" >
+                <div class="points points-circle"></div>
             </div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="3" data-ec-point-end="1" data-ec-direction="column" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="3" data-ec-point-to="1" data-ec-direction="column" >
+                <div class="points points-circle"></div>
             </div>
-            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-start="1" data-ec-point-end="3" data-ec-direction="column" >
-                <div class="points"></div>
+            <div class="elbow-connector test-ec d-inline-flex m-1" data-ec-point-from="1" data-ec-point-to="3" data-ec-direction="column" >
+                <div class="points points-circle"></div>
             </div>
         </div>
+        <h2>pos</h2>
+        <div class="border border-1 bg-body-secondary position-relative mb-5" style=" min-height: 400px;">
+            <button type="button" class="btn btn-primary" onclick="ElbowConnector.sync(document.querySelector('#ec-1'))">SYNC</button>
+            <div id="box-from" class="border border-1 rounded-pill text-bg-primary d-flex justify-content-center align-items-center position-absolute top-0 start-50" style="width:100px;height:50px">START</div>
+            <div id="box-to" class="border border-1 rounded-pill text-bg-primary d-flex justify-content-center align-items-center position-absolute bottom-0 end-50" style="width:100px;height:50px">END</div>
+
+            <div id="box-from-2" class="border border-1 rounded-pill text-bg-success d-flex justify-content-center align-items-center position-absolute top-50 start-0" style="width:100px;height:50px">START</div>
+            <div id="box-to-2" class="border border-1 rounded-pill text-bg-success d-flex justify-content-center align-items-center position-absolute bottom-50 end-0" style="width:100px;height:50px">END</div>
+        </div>
+        <div class="border border-1 bg-body-secondary   elbow-connector-container">
+            <div id="ec-1" class="elbow-connector test-ec" 
+            data-ec-from="#box-from" 
+            data-ec-from-knob="4" 
+            data-ec-to="#box-to" 
+            data-ec-to-knob="2" 
+            data-ec-point-from="0" 
+            data-ec-point-to="2" 
+
+            data-ec-direction="column" 
+            ></div>
+            <div id="ec-2" class="elbow-connector test-ec" 
+            data-ec-from="#box-from-2" 
+            data-ec-from-knob="2" 
+            data-ec-to="#box-to-2" 
+            data-ec-to-knob="6" 
+            data-ec-point-from="0" 
+            data-ec-point-to="2" 
+
+            data-ec-direction="column" 
+            ></div>
+        </div>
+        <h2>pos-2</h2>
+        <!-- <div class="border border-1 bg-body-secondary position-relative mb-5" style=" min-height: 400px;">
+            <div id="box-from" class="border border-1 rounded-pill text-bg-primary d-flex justify-content-center align-items-center position-absolute top-0 start-50" style="width:100px;height:50px">START</div>
+            <div id="box-to" class="border border-1 rounded-pill text-bg-primary d-flex justify-content-center align-items-center position-absolute bottom-0 end-50" style="width:100px;height:50px">END</div>
+        </div>
+        <div class="   x-elbow-connector-container" style=" min-height: 400px;">
+            <div id="ec-1" class="elbow-connector test-ec" data-ec-from="#box-from" data-ec-to="#box-to" data-ec-point-from="0" data-ec-point-to="2" data-ec-direction="column" ></div>
+            <button type="button" class="btn btn-primary" onclick="ElbowConnector.sync(document.querySelector('#ec-1'))">SYNC</button>
+        </div> -->
     </div>
 </body>
 </html>
