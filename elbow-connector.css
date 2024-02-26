@@ -83,13 +83,17 @@
         outline: 1px dotted #999;
     }
     & .elbow-connector > .line-before{
-        content: attr(data-ec-vertexes);
         background-color: #aabbcc66;
     }
     & .elbow-connector > .line-after{
-        content: attr(data-ec-vertexes);
         background-color: #ccbbaa66;
     }
+    & .elbow-connector::before{
+        display: block;
+        position: absolute;
+        content: attr(data-ec-vertexes);
+    }
+
 } 
 
 
@@ -143,65 +147,84 @@
 
 
 /* points */
-.elbow-connector > .points{
+.elbow-connector .point{
     position: absolute;
-    top:0;left:0;right:0;bottom:0;
-    --points-gap:calc( var(--elbow-connector-point-diameter) / 2 );
-    --points-gap2:calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
+    top:auto;left:auto;right:auto;bottom:auto;
+    --point-gap:calc( var(--elbow-connector-point-diameter) / 2 );
+    --point-gap2:calc( (var(--elbow-connector-point-diameter) - var(--elbow-connector-border-width)) / 2 );
 }
-.elbow-connector[data-ec-direction="row"] > .points{
-    --tanslate-top:calc(-1 * var(--points-gap2));
-    --tanslate-left:calc(-1 * var(--points-gap));
-    --tanslate-bottom:var(--points-gap2);
-    --tanslate-right:var(--points-gap);
+.elbow-connector[data-ec-direction="row"] .point{
+    --tanslate-top:calc(-1 * var(--point-gap2));
+    --tanslate-left:calc(-1 * var(--point-gap));
+    --tanslate-bottom:var(--point-gap2);
+    --tanslate-right:var(--point-gap);
 }
-.elbow-connector[data-ec-direction="column"] > .points{
-    --tanslate-top:calc(-1 * var(--points-gap));
-    --tanslate-left:calc(-1 * var(--points-gap2));
-    --tanslate-bottom:var(--points-gap);
-    --tanslate-right:var(--points-gap2);
+.elbow-connector[data-ec-direction="column"] .point{
+    --tanslate-top:calc(-1 * var(--point-gap));
+    --tanslate-left:calc(-1 * var(--point-gap2));
+    --tanslate-bottom:var(--point-gap);
+    --tanslate-right:var(--point-gap2);
 }
 
-.elbow-connector > .points::before,
-.elbow-connector > .points::after{
-
-    /* --elbow-connector-point-diameter:10px;
-    --elbow-connector-point-bg-color:blue; */
-
-    content: none;
-    width:var(--elbow-connector-point-diameter);
-    height:var(--elbow-connector-point-diameter);
-    display: none;;
+.elbow-connector .point{
+    width:var(--elbow-connector-border-width);
+    height:var(--elbow-connector-border-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
 }
-.elbow-connector > .points.points-default::before,
-.elbow-connector > .points.points-default::after{
+.elbow-connector[data-ec-vertexes^="0"] .point-before ,
+.elbow-connector[data-ec-vertexes$="0"] .point-after
+{ left:0;top:0; }
+
+.elbow-connector[data-ec-vertexes^="1"] .point-before ,
+.elbow-connector[data-ec-vertexes$="1"] .point-after
+{ right:0;top:0; }
+
+.elbow-connector[data-ec-vertexes^="2"] .point-before ,
+.elbow-connector[data-ec-vertexes$="2"] .point-after
+{ right:0;bottom:0; }
+
+.elbow-connector[data-ec-vertexes^="3"] .point-before ,
+.elbow-connector[data-ec-vertexes$="3"] .point-after
+{ left:0;bottom:0; }
+
+
+.elbow-connector .point-shape{
+    flex:1 0 100%;
+    min-width:var(--elbow-connector-point-diameter);
+    min-height:var(--elbow-connector-point-diameter);
+    display: none;
+}
+.elbow-connector .point-shape.point-shape-circle{
     display: block;
     border-radius: 99999px;
     background-color: var(--elbow-connector-point-bg-color);
 }
-.elbow-connector > .points.points-default::after{
+.elbow-connector .point-shape.point-shape-square{
+    display: block;
     border-radius: 0;
+    background-color: var(--elbow-connector-point-bg-color);
+}
+.elbow-connector .point-shape.point-shape-rhombus{
+    display: block;
+    border-radius: 0;
+    transform: rotate(45deg);
+    background-color: var(--elbow-connector-point-bg-color);
+}
+.elbow-connector .point-shape.point-shape-text{
+    display: flex;
+    color: var(--elbow-connector-point-bg-color);
+    font-size: var(--elbow-connector-point-diameter);
+    justify-content: center;
+    align-items: center;
+}
+.elbow-connector .point-shape.point-shape-text::before{
+    content:attr(data-point-shape-text);
 }
 
 
-.elbow-connector[data-ec-vertexes^="0"] > .points::before ,
-.elbow-connector[data-ec-vertexes$="0"] > .points::after
-{ content: ""; left:0;top:0; transform:translate(var(--tanslate-left) , var(--tanslate-top)); }
-
-.elbow-connector[data-ec-vertexes^="1"] > .points::before ,
-.elbow-connector[data-ec-vertexes$="1"] > .points::after
-{ content: ""; right:0;top:0; transform:translate(var(--tanslate-right) , var(--tanslate-top)); }
-
-
-.elbow-connector[data-ec-vertexes^="2"] > .points::before ,
-.elbow-connector[data-ec-vertexes$="2"] > .points::after
-{ content: ""; right:0;bottom:0; transform:translate(var(--tanslate-right), var(--tanslate-bottom)); }
-
-
-.elbow-connector[data-ec-vertexes^="3"] > .points::before ,
-.elbow-connector[data-ec-vertexes$="3"] > .points::after
-{ content: ""; left:0;bottom:0; transform:translate(var(--tanslate-left), var(--tanslate-bottom)); }
 
 
 
