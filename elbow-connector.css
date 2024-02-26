@@ -14,17 +14,13 @@
     width:0;height:0;
     overflow: visible;
 }
-.elbow-connector-container[data-postion="relative"]{
-
+.elbow-connector *{
+    box-sizing: border-box;
 }
-.elbow-connector-container[data-postion="absolute"]{
 
-}
-.elbow-connector-container[data-postion="fixed"]{
-
-}
 .elbow-connector{
     
+    box-sizing: border-box;
 
     display: flex;
     flex-direction: row;
