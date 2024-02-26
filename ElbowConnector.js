@@ -7,7 +7,6 @@ class ElbowConnector{
     el.addEventListener('load',(evnet)=>{
       this.syncAll();
     },{once:true})
-    
   }
   static syncAll(){
     let els = document.querySelectorAll('.elbow-connector[data-ec-from][data-ec-to]').forEach((el)=>{
@@ -34,29 +33,38 @@ class ElbowConnector{
     let xyFrom = this.getXY(rectFrom,ecFromKnob);
     let xyTo = this.getXY(rectTo,ecToKnob);
     
-    ecEl.dataset.ecDirection = Math.abs(xyFrom.x - xyTo.x) - Math.abs(xyFrom.y - xyTo.y) >= 0?'row':'column'
+    if(ecFromKnob=="0" || ecFromKnob == "4" || ecToKnob=="0" || ecToKnob == "4" ){
+      ecEl.dataset.ecDirection = "column";
+    }else if(ecFromKnob=="2" || ecFromKnob == "6" || ecToKnob=="2" || ecToKnob == "6" ){
+      ecEl.dataset.ecDirection = "row";
+    }else{
+      ecEl.dataset.ecDirection = (Math.abs(xyFrom.x - xyTo.x) - Math.abs(xyFrom.y - xyTo.y)) >= 0?'row':'column'
+    }
+    
+    if(xyFrom.x <= xyTo.x){ //왼쪽:xyFrom
+      if(xyFrom.y <= xyTo.y){ //상단:xyFrom
+        ecEl.dataset.ecVertexes = '0 2';
+      }else{
+        ecEl.dataset.ecVertexes = '3 1';
+      }
+    }else{ //왼쪽 개체:xyTo
+      if(xyFrom.y <= xyTo.y){//상단:xyFrom
+        ecEl.dataset.ecVertexes = '1 3';
+      }else{
+        ecEl.dataset.ecVertexes = '2 0';
+      }
+    }
 
     // console.log('ecContainer',ecContainer,rectContainer);
     // console.log('ecEl',ecEl,rectEl);
-    console.log('ecFrom',ecFrom,rectFrom);
-    console.log('ecTo',ecTo,rectTo);
-    console.log(ecFromKnob,xyFrom);
-    console.log(ecToKnob,xyTo);
+    // console.log('ecFrom',ecFrom,rectFrom);
+    // console.log('ecTo',ecTo,rectTo);
+    // console.log(ecFromKnob,xyFrom);
+    // console.log(ecToKnob,xyTo);
     
-
-    // let ecElTop = parseFloat(ecEl.style.getPropertyValue('--ec-top')?ecEl.style.getPropertyValue('--ec-top'):0)
-    // let ecElLeft = parseFloat(ecEl.style.getPropertyValue('--ec-left')?ecEl.style.getPropertyValue('--ec-left'):0)
-    // let ecElBottom = parseFloat(ecEl.style.getPropertyValue('--ec-bottom')?ecEl.style.getPropertyValue('--ec-bottom'):0)
-    // let ecElRight = parseFloat(ecEl.style.getPropertyValue('--ec-right')?ecEl.style.getPropertyValue('--ec-right'):0)
-    // console.log(ecElTop,ecElLeft,ecElBottom,ecElRight);
-
     let rect = {
-      // top :rectFrom.top-rectEl.top+ecElTop,
-      // left : rectFrom.left-rectEl.left+ecElLeft,
       top :Math.min(xyFrom.y,xyTo.y)-rectContainer.top,
       left :Math.min(xyFrom.x,xyTo.x)-rectContainer.left,
-      // bottom :rectFrom.bottom-rectEl.bottom+ecElBottom,
-      // right : rectFrom.right-rectEl.right+ecElRight,
       bottom : rectContainer.bottom - Math.max(xyFrom.y,xyTo.y),
       right : rectContainer.right - Math.max(xyFrom.x,xyTo.x),
     }
@@ -65,7 +73,7 @@ class ElbowConnector{
     ecEl.style.setProperty('--ec-bottom',rect.bottom+'px')
     ecEl.style.setProperty('--ec-right',rect.right+'px')
     
-    console.log(rect);
+    // console.log(rect);
   }
 
   static getXY(rect,pos){
